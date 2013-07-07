@@ -1,4 +1,4 @@
-package org.illuminati
+package org.namnam
 
 import org.specs2.mutable.Specification
 

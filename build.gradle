@@ -1,7 +1,10 @@
 apply plugin: 'idea'
 apply plugin: 'scala'
 
-ext.scalaVersion = "2.10"
+ext.scalaVersion    = "2.10.2"
+ext.slf4jVersion    = "1.7.2"
+ext.logbackVersion  = "1.0.13"
+ext.guavaVersion    = "14.0.1"
 
 repositories {
     mavenCentral()
@@ -20,8 +23,28 @@ sourceSets {
     }
 }
 
+configurations {
+    all {
+        resolutionStrategy.failOnVersionConflict()
+        resolutionStrategy {
+            force   "org.slf4j:slf4j-api:$slf4jVersion",
+                    "ch.qos.logback:logback-classic:$logbackVersion",
+                    "ch.qos.logback:logback-core:$logbackVersion",
+                    "com.google.guava:guava:$guavaVersion",
+                    "it.unimi.dsi:fastutil:6.5.4",
+                    "org.scala-lang:scala-library:$scalaVersion"
+        }
+    }
+
+    all*.exclude module: "slf4j-log4j12"
+    all*.exclude module: "jcl-over-slf4"
+    all*.exclude module: "log4j"
+}
+
 dependencies {
+    compile     "ch.qos.logback:logback-classic:$logbackVersion"
+    compile     "ch.qos.logback:logback-core:$logbackVersion"
     compile     "org.scala-lang:scala-library:$scalaVersion"
-    compile     "org.scala-saddle:saddle-core_$scalaVersion:1.3.0"
-    testCompile "org.specs2:specs2_$scalaVersion:2.0"
+    compile     "org.scala-saddle:saddle-core_2.10:1.3.0"
+    testCompile "org.specs2:specs2_2.10:2.0"
 }
