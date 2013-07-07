@@ -13,12 +13,12 @@ repositories {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/scala']
+            srcDirs = ['src/main/scala']
         }
     }
     test {
         scala {
-            srcDirs = ['test/scala']
+            srcDirs = ['src/test/scala']
         }
     }
 }
