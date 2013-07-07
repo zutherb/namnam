@@ -1,0 +1,27 @@
+apply plugin: 'idea'
+apply plugin: 'scala'
+
+ext.scalaVersion = "2.10"
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/scala']
+        }
+    }
+    test {
+        scala {
+            srcDirs = ['test/scala']
+        }
+    }
+}
+
+dependencies {
+    compile     "org.scala-lang:scala-library:$scalaVersion"
+    compile     "org.scala-saddle:saddle-core_$scalaVersion:1.3.0"
+    testCompile "org.specs2:specs2_$scalaVersion:2.0"
+}
